@@ -6,7 +6,7 @@ include('activity_log_function.php');
 include('pagination_config.php'); 
 
 //set time
-date_default_timezone_set('Africa/Accra');
+date_default_timezone_set('Africa/Lagos');
 $current_date = date('Y-m-d H:i:s');
 
 // Define the current month and year
@@ -26,6 +26,7 @@ $row_website = $stmt->fetch();
 $app_name= $row_website['site_name'] ;
 $app_email = $row_website['site_email'] ;
 $app_logo = $row_website['logo'] ;
+$app_url = $row_website['site_url'] ;
 
 
 

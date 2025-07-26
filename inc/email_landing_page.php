@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 // Load Composer's autoloader
-require_once 'email_vendor/autoload.php';
+require_once 'vendor/autoload.php';
 function sendEmail($to, $subject, $body,$backupFile = null) {
     // Access global variables if needed
     global $app_email, $app_name;

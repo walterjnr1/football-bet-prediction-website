@@ -24,5 +24,6 @@ $row_website = $stmt->fetch();
 $app_name= $row_website['site_name'] ;
 $app_email = $row_website['site_email'] ;
 $app_logo = $row_website['logo'] ;
+$app_url = $row_website['site_url'] ;
 
 ?>
