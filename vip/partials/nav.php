@@ -1,6 +1,6 @@
     <div class="nav-left">
       <div class="nav-logo">
-        <a href="#"><img src="../images/logo.png" alt="Logo"></a>
+        <a href="#"><img src="../<?php echo $app_logo; ?>" alt="Logo"></a>
       </div>
       <div class="nav-links">
         <a href="index">Home</a>
@@ -10,8 +10,8 @@
     </div>
 
     <div class="user-info" onclick="toggleDropdown()">
-      <img src="../images/person_2.jpg" alt="User" id="navProfileImg">
-      <span id="navUserName">Harry Joe</span>
+      <img src="../<?php echo $app_logo; ?>" alt="User" id="navProfileImg">
+      <span id="navUserName"><?php echo $row_user['full_name']; ?></span>
       <div class="dropdown" id="userDropdown">
         <a href="profile">Profile</a>
         <a href="logout">Logout</a>

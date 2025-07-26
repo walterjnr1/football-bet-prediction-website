@@ -23,7 +23,7 @@ if (isset($_SESSION['logged']) && ($t - $_SESSION['logged'] > 3600)) {
   $role = isset($_SESSION['role']) ? $_SESSION['role'] : 'user';
   $ip_address = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'unknown';
   //  activity log
-  $action = "Logged Out from admin dashboard on: $current_date";
+  $action = "Logged Out from vip dashboard on: $current_date";
   log_activity($dbh, $user_id, $action, '', '', $ip_address);
 
   header("Location: ../login.php");

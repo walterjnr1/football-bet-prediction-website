@@ -1,6 +1,6 @@
 <div class="logo-area">
-            <img src="../images/logo.png" alt="Victory Fixed Logo">
-            <span>Victory Fixed</span>
+            <img src="../<?php echo $app_logo; ?>" alt="Victory Fixed Logo">
+            <span><?php echo $app_name; ?></span>
         </div>
         <div class="nav-links">
             <a href="index">Home</a>
@@ -9,9 +9,9 @@
              <a href="logout">Logout</a>
         </div>
         <div class="user-area" style="position: relative;">
-            <span class="user-name" id="userDropdownToggle">Harry Joe</span>
+            <span class="user-name" id="userDropdownToggle"><?php echo $row_user['full_name']; ?></span>
             <div class="dropdown" id="userDropdown" style="display: inline-flex; align-items: center; cursor: pointer;">
-                <img src="../images/person_2.jpg" alt="User" class="user-img" id="userImgDropdown" style="width: 32px; height: 32px; border-radius: 50%;">
+                <img src="../<?php echo $row_user['image']; ?>" alt="User" class="user-img" id="userImgDropdown" style="width: 32px; height: 32px; border-radius: 50%;">
                 <i class="fas fa-chevron-down" id="dropdownIcon" style="color:#fff; font-size:15px; margin-left:4px;"></i>
             </div>
             <!-- Dropdown menu -->

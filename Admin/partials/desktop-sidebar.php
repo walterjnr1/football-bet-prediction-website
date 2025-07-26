@@ -39,8 +39,8 @@
   </div>
 
   <!-- Subscription Management Dropdown -->
-  <a data-bs-toggle="collapse" href="#subscriptionMenu"><i class="lni lni-coin"></i> Subscription Management</a>
-  <div class="collapse submenu" id="subscriptionMenu">
+ <a data-bs-toggle="collapse" href="#SubscriptionMenu"><i class="lni lni-users"></i> Subscription Management</a>
+  <div class="collapse submenu" id="SubscriptionMenu">
     <a href="add-subscription">Add Subscription</a>
     <a href="subscription-records">Subscription Records</a>
   </div>

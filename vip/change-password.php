@@ -16,7 +16,7 @@
   <div class="container">
     <div class="change-password-card">
       <h2>Change Password</h2>
-      <form action="change_password.php" method="POST">
+      <form action="" method="POST">
         <input type="password" name="current_password" placeholder="Current Password" required>
         <input type="password" name="new_password" placeholder="New Password" required>
         <input type="password" name="confirm_password" placeholder="Confirm New Password" required>

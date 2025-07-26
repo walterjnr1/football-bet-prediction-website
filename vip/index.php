@@ -1,11 +1,35 @@
+<?php 
+include('../inc/config.php');
+if (empty($_SESSION['user_id'])) {
+    header("Location: ../login");
+    exit;
+}
+
+// Handle review submission
+if (isset($_POST['btnreview'])) {
+    $comment = $_POST['comment'];
+    $rating = $_POST['rating'];
+
+    $sql = "INSERT INTO reviews (user_id, comment, rating) VALUES (:user_id, :comment, :rating)";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bindParam(':comment', $comment);
+    $stmt->bindParam(':rating', $rating);
+
+    if ($stmt->execute()) {
+        $_SESSION['toast'] = ['type' => 'success', 'message' => 'Review submitted successfully!'];
+    } else {
+        $_SESSION['toast'] = ['type' => 'error', 'message' => 'Failed to submit review. Please try again.'];
+    }
+    header("Location: index");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Victory Fixed - VIP Dashboard</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="assets/css/main-style.css"/>
+    <title><?php echo $app_name; ?> - VIP Dashboard</title>
+    <?php include 'partials/head.php'; ?>
 </head>
 <body>
 
@@ -14,23 +38,32 @@
     </div>
 
     <div class="welcome-bar">
-        You are welcome to Victory Fixed VIP Room, we provide 2 fixed correct scores daily. Ticket price is...
+        You are welcome to <?php echo $app_name; ?> VIP Room, we provide 2 fixed correct scores daily. Ticket price is...
     </div>
 
     <div class="schedule-bar">
-        Next Fixed Match Scheduled for - Friday, June 23rd 2025
+        <?php
+        $next_day = date('l, F jS Y', strtotime('+1 day'));
+        echo "Next Fixed Match Scheduled for - $next_day";
+        ?>
     </div>
 
     <div class="container">
         <?php include 'partials/container.php'; ?>
     </div>
 
-    <a href="https://wa.me/2348067361023" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+   
+
     <script src="assets/js/dropdown-content.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <footer>
         <?php include 'partials/footer.php'; ?>
     </footer>
+
+    <!-- ✅ SweetAlert Toast Notification -->
+  <?php include 'partials/sweetalert.php'; ?>
+
 
 </body>
 </html>

@@ -1,9 +1,10 @@
-      <div class="main-content">
+     
+     <div class="main-content">
             <div class="cards-row" id ="loading-cards">
                 <div class="card"><div class="loader"></div></div>
                 <div class="card"><div class="loader"></div></div>
             </div>
-            <p><a href="../index.html">View Today's Tips</a></p>
+            <p><a href="../index">View Today's Tips</a></p>
             <div class="past-label">
                 Past successful fixed matches
             </div>
@@ -125,72 +126,58 @@
         </div>
         <div class="sidebar">
             <div class="vip-results">
-                <h4>Recent VIP Results</h4>
-                <div class="result-grid">
-                    <div class="result-day win">
-                        <div class="icon-square">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="day">Mon</div>
-                        <div class="date">07/21</div>
-                    </div>
-                    <div class="result-day win">
-                        <div class="icon-square">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="day">Sun</div>
-                        <div class="date">07/20</div>
-                    </div>
-                    <div class="result-day lose">
-                        <div class="icon-square">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <div class="day">Sat</div>
-                        <div class="date">07/19</div>
-                    </div>
-                    <div class="result-day win">
-                        <div class="icon-square">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="day">Fri</div>
-                        <div class="date">07/18</div>
-                    </div>
-                    <div class="result-day win">
-                        <div class="icon-square">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="day">Thu</div>
-                        <div class="date">07/17</div>
-                    </div>
-                    <div class="result-day lose">
-                        <div class="icon-square">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <div class="day">Wed</div>
-                        <div class="date">07/16</div>
-                    </div>
-                </div>
+                <?php
+
+$sql = "SELECT result_date, outcome FROM vip_results ORDER BY result_date DESC LIMIT 6";
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Function to get day name from date
+function getDayName($date) {
+    return date('D', strtotime($date)); // e.g., Mon, Tue
+}
+?>
+
+<h4>Recent VIP Results</h4>
+<div class="result-grid">
+    <?php foreach ($results as $row): ?>
+        <div class="result-day <?= $row['outcome'] == 'won' ? 'win' : 'lose' ?>">
+            <div class="icon-square">
+                <i class="fas <?= $row['outcome'] == 'won' ? 'fa-check' : 'fa-times' ?>"></i>
+            </div>
+            <div class="day"><?= getDayName($row['result_date']) ?></div>
+            <div class="date"><?= date('m/d', strtotime($row['result_date'])) ?></div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
             </div>
             <div class="review-section">
                 <h4>Leave a Review</h4>
-                <form class="review-form">
+                <form class="review-form" method="POST">
                     <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" placeholder="Enter your name" required>
+                    <input type="text" id="fullname" name="fullname" value="<?php echo $row_user['full_name']; ?>" readonly>
 
                     <label for="comment">Comment</label>
-                    <textarea id="comment" placeholder="Write your comment" required></textarea>
+                    <textarea id="comment" name="comment" placeholder="Write your comment" required></textarea>
 
                     <label for="rating">Select Rating</label>
-                    <select id="rating" required>
+                    <select id="rating" name="rating" required>
                         <option value="">Select Rating</option>
-                        <option>⭐⭐⭐⭐⭐ - Excellent</option>
-                        <option>⭐⭐⭐⭐ - Very Good</option>
-                        <option>⭐⭐⭐ - Good</option>
-                        <option>⭐⭐ - Fair</option>
-                        <option>⭐ - Poor</option>
+                        <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ - Very Good</option>
+                        <option value="3">⭐⭐⭐ - Good</option>
+                        <option value="2">⭐⭐ - Fair</option>
+                        <option value="1">⭐ - Poor</option>
                     </select>
 
-                    <button type="submit">Submit</button>
+                    <button type="submit" name = "btnreview">Submit</button>
                 </form>
             </div>
         </div>
+
+
+         <a href="https://wa.me/<?php echo $row_website['whatsapp_phone']; ?>" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
