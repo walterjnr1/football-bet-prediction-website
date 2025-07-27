@@ -38,6 +38,15 @@
     <a href="vip-records">VIP Records</a>
   </div>
 
+  <!-- Subscription Management Dropdown -->
+  <a data-bs-toggle="collapse" href="#SubscriptionMenuMobile"><i class="lni lni-users"></i> Subscription Management</a>
+  <div class="collapse submenu" id="SubscriptionMenuMobile">
+    <a href="add-subscription">Add Subscription</a>
+    <a href="subscription-records">Subscription Records</a>
+    <a href="special-payment">Special Payment</a>
+
+  </div>
+
   <!-- Review Management -->
   <a data-bs-toggle="collapse" href="#reviewMenuMobile"><i class="lni lni-comments-alt"></i> Review Management</a>
   <div class="collapse submenu" id="reviewMenuMobile">

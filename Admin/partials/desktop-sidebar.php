@@ -43,6 +43,8 @@
   <div class="collapse submenu" id="SubscriptionMenu">
     <a href="add-subscription">Add Subscription</a>
     <a href="subscription-records">Subscription Records</a>
+    <a href="special-payment">Special Payment</a>
+
   </div>
 
   <!-- Review Management Dropdown -->

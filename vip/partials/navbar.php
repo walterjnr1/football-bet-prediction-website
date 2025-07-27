@@ -4,7 +4,7 @@
         </div>
         <div class="nav-links">
             <a href="index">Home</a>
-            <a href="#">Live Score</a>
+            <a href="livescores" target="_blank">Live Score</a>
             <a href="contact-us">Contact Us</a>
              <a href="logout">Logout</a>
         </div>

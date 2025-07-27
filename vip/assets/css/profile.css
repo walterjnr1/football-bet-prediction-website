@@ -17,7 +17,7 @@
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 30px;
     }
 
     .nav-logo img {
@@ -35,47 +35,45 @@
       font-weight: 500;
     }
 
-    .user-info {
-      display: flex;
-      align-items: center;
-      position: relative;
-      cursor: pointer;
-    }
+  .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+}
 
-    .user-info img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 10px;
-      border: 2px solid #fff;
-    }
+.user-info img {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+}
 
-    .dropdown {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 50px;
-      background: white;
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      width: 160px;
-      z-index: 999;
-    }
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 100;
+  min-width: 160px;
+  padding: 5px 0;
+}
 
-    .dropdown a {
-      display: block;
-      padding: 12px 15px;
-      color: #333;
-      text-decoration: none;
-      font-size: 14px;
-      border-bottom: 1px solid #eee;
-    }
+.dropdown a {
+  display: block;
+  padding: 10px 15px;
+  color: #000;
+  text-decoration: none;
+}
 
-    .dropdown a:hover {
-      background: #f0f0f0;
-    }
-
+.dropdown a:hover {
+  background-color: #f0f0f0;
+}
     .container {
       padding: 30px;
       max-width: 900px;
@@ -90,7 +88,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
     }
 
     .profile-img-container {
@@ -144,7 +141,7 @@
       color: #555;
     }
 
-    .modal, .modal-img {
+    .modal {
       display: none;
       position: fixed;
       z-index: 999;
@@ -168,8 +165,9 @@
       text-align: center;
     }
 
-    .modal-content input,
-    .modal-content textarea {
+    .modal-content input[type="text"],
+    .modal-content input[type="email"],
+    .modal-content input[type="file"] {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
@@ -213,95 +211,4 @@
       margin: 20px auto;
       border: 2px solid #ccc;
       border-radius: 6px;
-    }
-
-
-    .container-contact {
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 30px;
-      background-color: #f8f9fa;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    form input, form textarea {
-      width: 100%;
-      padding: 12px 15px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-
-    form button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background-color: #007bff;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    form button:hover {
-      background-color: #0056b3;
-    }
-
-    .contact-info {
-      text-align: center;
-      margin-top: 30px;
-      font-size: 15px;
-      color: #666;
-    }
-
-
-    .error-container {
-      max-width: 700px;
-      margin: 100px auto;
-      text-align: center;
-      padding: 40px;
-      background-color: #f8f9fa;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-
-    .error-container h1 {
-      font-size: 100px;
-      color: #dc3545;
-      margin-bottom: 10px;
-    }
-
-    .error-container h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-      color: #333;
-    }
-
-    .error-container p {
-      font-size: 18px;
-      color: #555;
-      margin-bottom: 30px;
-    }
-
-    .error-container a {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: #007bff;
-      color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
-    .error-container a:hover {
-      background-color: #0056b3;
     }

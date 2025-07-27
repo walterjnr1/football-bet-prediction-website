@@ -1,7 +1,6 @@
 <?php
 include('../inc/config.php');
 include('../inc/email_dashboard.php');
-session_start();
 
 if (empty($_SESSION['user_id'])) {
     header("Location: ../login");
@@ -27,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tip_other = trim($_POST['tip_other'] ?? '');
     $odds = $_POST['odds'] ?? '';
 
-    // Insert new league/team/tip if "other"
     if ($league_id === 'other' && $league_other) {
         $dbh->prepare("INSERT INTO leagues (name, country) VALUES (?, '')")->execute([$league_other]);
         $league_id = $dbh->lastInsertId();
@@ -67,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $league_name = getLeagueName($dbh, $league_id);
     $today = date('Y-m-d');
 
-    // Fetch VIPs whose subscription is active
     $stmtVip = $dbh->prepare("
       SELECT u.full_name, u.email
       FROM users u
@@ -97,25 +94,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <h2>Hi '.htmlspecialchars($first_name).',</h2>
             <p>We’ve just analyzed today’s top match and here’s a fresh betting prediction from our expert team:</p>
-            <div class="sport-tag">Sport: '.strtoupper(htmlspecialchars($sport)).'</div>
+            <div class="sport-tag">'.strtoupper(htmlspecialchars($sport)).'</div>
             <div class="highlight">
               <strong>Match:</strong> '.htmlspecialchars($home_team).' vs '.htmlspecialchars($away_team).'<br>
-              <strong>League:</strong> '.htmlspecialchars($league_name).'<br>
-              <strong>Date:</strong> '.htmlspecialchars(date('F j, Y', strtotime($match_date))).'<br>
+                <strong>League:</strong> '.htmlspecialchars($league_name).'<br>
+                <strong>Match Date/Time:</strong> '.htmlspecialchars(date('F j, Y h:i A', strtotime($match_date))).'<br>
               <strong>Prediction Type:</strong> '.strtoupper(htmlspecialchars($type)).'<br>
               <strong>Tip:</strong> '.htmlspecialchars($prediction_text).'<br>
               <strong>Odds:</strong> '.htmlspecialchars($odds).'
             </div>
             <p>This prediction is based on current form, head‑to‑head stats, injury reports, and strategic analysis from our betting experts.</p>
             <p><strong>Note:</strong> Bet responsibly. Only stake what you can afford to lose. This prediction is a recommendation, not a guarantee.</p>
-            <a href="'.htmlspecialchars($app_url).'" class="cta">View More Predictions</a>
+            <a href="'.htmlspecialchars($app_url.'/Admin').'" class="cta">View More Predictions</a>
             <div class="footer">&copy; '.date('Y').' '.htmlspecialchars($app_name ?? 'Victory Fixed').'. All rights reserved.</div>
         </div></body></html>';
 
         sendEmail($email, $subject, $message);
     }
 
-    // Log activity
     $ip_address = $_SERVER['REMOTE_ADDR'] ?? '';
     log_activity($dbh, $user_id, "Posted new prediction", 'predictions', $prediction_id, $ip_address);
 
@@ -125,12 +121,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 function getTeamName($dbh, $id) {
-    return $dbh->prepare("SELECT name FROM teams WHERE id=?")->execute([$id]) ? $dbh->lastInsertId() : '';
+    $stmt = $dbh->prepare("SELECT name FROM teams WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetchColumn() ?: '';
 }
+
 function getLeagueName($dbh, $id) {
-    return $dbh->prepare("SELECT name FROM leagues WHERE id=?")->execute([$id]) ? $dbh->lastInsertId() : '';
+    $stmt = $dbh->prepare("SELECT name FROM leagues WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetchColumn() ?: '';
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -187,7 +189,7 @@ function getLeagueName($dbh, $id) {
   </div>
   <div class="mb-3">
     <label class="form-label">Match Date</label>
-    <input type="date" class="form-control" name="match_date" required>
+    <input type="datetime-local" class="form-control" name="match_date" required>
   </div>
 
   <div class="mb-3">

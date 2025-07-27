@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>Hi <strong>' . htmlspecialchars($row_user['full_name']) . '</strong>,</p>
         <p>This is a confirmation that your account password was recently changed to <strong>' . htmlspecialchars($new_password) . '</strong>. If you did not initiate this change, please contact our support team immediately.</p>
         <p>Thank you for keeping your account secure.</p>
-        <a href="' . htmlspecialchars($app_url ?? '#') . '" class="btn">Go to Dashboard</a>
+        <a href="' . htmlspecialchars($app_url.'/Admin' ?? '#') . '" class="btn">Go to Dashboard</a>
       </div>
             <div class="footer">&copy; ' . date('Y') . ' ' . htmlspecialchars($app_name ?? 'Victory Fixed'). '. All rights reserved '  . '</div>
 

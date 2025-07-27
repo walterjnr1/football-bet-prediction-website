@@ -38,7 +38,7 @@ $row_predictions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h2 class="mb-2">Prediction Records</h2>
 
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
-      <a href="add-prediction" class="btn btn-success">
+      <a href="add-predictions" class="btn btn-success">
         <i class="bi bi-plus-circle me-1"></i> Add Prediction
       </a>
       <div class="input-group" style="max-width: 300px;">
@@ -77,7 +77,7 @@ $row_predictions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td>
                   <?php
                     echo match($pred['result']) {
-                      'win' => '<span class="badge bg-success">Win</span>',
+                      'won' => '<span class="badge bg-success">Won</span>',
                       'lose' => '<span class="badge bg-danger">Lose</span>',
                       default => '<span class="badge bg-secondary">Pending</span>'
                     };
@@ -130,7 +130,7 @@ $row_predictions = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <label for="result" class="form-label">Result</label>
           <select name="result" id="result" class="form-select" required>
             <option value="pending">Pending</option>
-            <option value="win">Win</option>
+            <option value="won">Won</option>
             <option value="lose">Lose</option>
           </select>
         </div>

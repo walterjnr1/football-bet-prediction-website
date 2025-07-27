@@ -59,7 +59,7 @@ $vip_results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td>
                   <?php
                     echo match($row['outcome']) {
-                      'win' => '<span class="badge bg-success">Win</span>',
+                      'won' => '<span class="badge bg-success">Won</span>',
                       'lose' => '<span class="badge bg-danger">Lose</span>',
                       default => '<span class="badge bg-secondary">Unknown</span>',
                     };

@@ -1,3 +1,10 @@
+<?php 
+include('../inc/config.php');
+if (empty($_SESSION['user_id'])) {
+    header("Location: ../login");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
