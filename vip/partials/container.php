@@ -465,7 +465,7 @@ $stageConfig = isset($modalConfig[$current_stage]) ? $modalConfig[$current_stage
     <div class="review-section">
         <h4>Leave a Review</h4>
         <form class="review-form" method="POST">
-            <input type="text" name="fullname" value="<?php echo isset($row_user['full_name']) ? htmlspecialchars($row_user['full_name']) : ''; ?>" readonly>
+            <input type="text" name="full_name" value="<?php echo isset($row_user['full_name']) ? htmlspecialchars($row_user['full_name']) : ''; ?>" required>
 
             <label for="comment">Comment</label>
             <textarea id="comment" name="comment" placeholder="Write your comment" required></textarea>

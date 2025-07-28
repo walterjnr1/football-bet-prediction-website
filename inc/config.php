@@ -38,5 +38,8 @@ $no_vip = $stmt->fetch();
 $stmt = $dbh->query("SELECT COUNT(*) as total FROM predictions");
 $no_predictions = $stmt->fetch();
 
+//no of predictions won
+$stmt = $dbh->query("SELECT COUNT(*) as total FROM predictions where result='won'");
+$no_predictions_won = $stmt->fetch();
 
 ?>

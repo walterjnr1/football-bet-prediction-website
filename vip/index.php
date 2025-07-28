@@ -16,8 +16,13 @@ if (isset($_POST['btnreview'])) {
     $stmt->bindParam(':full_name', $full_name);
     $stmt->bindParam(':comment', $comment);
     $stmt->bindParam(':rating', $rating);
+    $review_id = $dbh->lastInsertId();
 
     if ($stmt->execute()) {
+         // Log activity
+         $action = "User added review on: $current_date"; 
+          log_activity($dbh, $user['id'], $action, 'reviews',$review_id, $ip_address);
+          
         $_SESSION['toast'] = ['type' => 'success', 'message' => 'Review submitted successfully!'];
     } else {
         $_SESSION['toast'] = ['type' => 'error', 'message' => 'Failed to submit review. Please try again.'];

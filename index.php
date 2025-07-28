@@ -2,16 +2,21 @@
 include('config.php');
 // Handle review submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnreview'])) {
-    $name = trim($_POST['name']);
+    $full_name = trim($_POST['full_name']);
     $comment = trim($_POST['comment']);
     $rating = intval($_POST['rating']);
 
-    if (!empty($name) && !empty($comment) && $rating >= 1 && $rating <= 5) {
+    if (!empty($full_name) && !empty($comment) && $rating >= 1 && $rating <= 5) {
         $stmt = $dbh->prepare("INSERT INTO reviews (full_name, comment, rating) VALUES (?, ?, ?)");
-        $stmt->execute([$name, $comment, $rating]);
-
+        $stmt->execute([$full_name, $comment, $rating]);
+        $review_id = $dbh->lastInsertId();
+   
+         // Log activity
+         $action = "User added review on: $current_date"; 
+          log_activity($dbh, $user['id'], $action, 'reviews',$user['id'], $ip_address);
         $_SESSION['toast'] = ['type' => 'success', 'message' => 'Thank you for your review!'];
-        header("Location: ".$_SERVER['PHP_SELF']);
+        header("Location: index");
+
         exit;
     } else {
         $_SESSION['toast'] = ['type' => 'error', 'message' => 'All fields are required and rating must be between 1-5.'];
@@ -82,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnreview'])) {
         <h3>Leave a Review</h3>
         <form method="POST">
           <label>First Name</label>
-          <input type="text" name="name" required />
+          <input type="text" name="full_name" required />
 
           <label>Comment</label>
           <textarea name="comment" rows="5" maxlength="120"></textarea>

@@ -59,7 +59,7 @@ header("Location: ../login");
   <div class="analytics-card analytics-revenue text-white">
     <i class="lni lni-ticket me-2 text-white"></i> 
     <span class="fw-semibold fs-5">Total Predictions Won</span>
-    <span class="fs-3 fw-bold">3,543</span>
+          <span class="fs-3 fw-bold"><?php echo $no_predictions_won['total']; ?></span>
     <a href="#" class="text-white">View Traffic</a>
   </div>
 </div>
@@ -68,23 +68,42 @@ header("Location: ../login");
 
     <h4 class="mb-3">Recent Registered Users</h4>
     <div class="row g-4 mb-5">
+  <?php
+  $vipQuery = "SELECT full_name, email, phone, image, status FROM users WHERE role = 'vip' ORDER BY id DESC LIMIT 8";
+  $stmt = $dbh->prepare($vipQuery);
+  $stmt->execute();
+  $vipUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  if ($vipUsers) {
+    foreach ($vipUsers as $user) {
+      $name = htmlspecialchars($user['full_name']);
+      $email = htmlspecialchars($user['email']);
+      $phone = htmlspecialchars($user['phone']);
+      $status = strtolower($user['status']);
+      $image = !empty($user['image']) ? htmlspecialchars($user['image']) : 'https://randomuser.me/api/portraits/men/1.jpg';
+
+      // Define badge color and online indicator
+      $badgeColor = $status === 'active' ? 'success' : 'secondary';
+      $onlineDot = $status === 'active' ? '<span class="online-dot bg-success"></span>' : '<span class="online-dot bg-secondary"></span>';
+  ?>
       <div class="col-md-3 col-sm-6">
-        <div class="card user-card text-center shadow-sm p-3">
-          <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="User">
-          <h6 class="mt-2">John Doe</h6>
-          <small>📞 08012345678</small><br>
-          <small>📧 john@example.com</small>
+        <div class="card user-card text-center shadow-sm p-3 position-relative">
+          <?= $onlineDot ?>
+          <img src="../<?= $image ?>" alt="<?= $name ?>" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+          <h6 class="mt-2"><?= $name ?></h6>
+          <small>📞 <?= $phone ?></small><br>
+          <small><?= $email ?></small><br>
+          <span class="badge bg-<?= $badgeColor ?> mt-2 text-capitalize"><?= $status ?></span>
         </div>
       </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="card user-card text-center shadow-sm p-3">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
-          <h6 class="mt-2">Jane Smith</h6>
-          <small>📞 08087654321</small><br>
-          <small>📧 jane@example.com</small>
-        </div>
-      </div>
-    </div>
+  <?php
+    }
+  } else {
+    echo '<div class="col-12"><p class="text-center">No VIP users found.</p></div>';
+  }
+  ?>
+</div>
+
 
     <?php
 $sql = "SELECT * FROM activity_logs ORDER BY action_time DESC LIMIT 10";
