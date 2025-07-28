@@ -1,0 +1,257 @@
+        body { font-family: 'Inter', sans-serif; }
+        .animated-gradient {
+            background: linear-gradient(120deg, #6366f1, #a78bfa, #f472b6, #34d399, #fbbf24, #6366f1, #f472b6, #34d399);
+            background-size: 200% 200%;
+            animation: gradientBG 5s linear infinite alternate;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 100%;}
+            25% {background-position: 50% 0%;}
+            50% {background-position: 100% 100%;}
+            75% {background-position: 50% 100%;}
+            100% {background-position: 0% 100%;}
+        }
+        /* Floating shapes with rotate and scale - each with unique color and animation */
+        .shape {
+            position: absolute;
+            opacity: 0.22;
+            pointer-events: none;
+        }
+        .shape-1 { left: 10%; top: 20%; width: 120px; height: 120px; background: #fff; border-radius: 50%; animation: floatRotate1 4s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        .shape-2 { right: 12%; top: 30%; width: 80px; height: 80px; background: #fbbf24; border-radius: 50%; animation: floatRotate2 4.5s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        .shape-3 { left: 25%; bottom: 18%; width: 100px; height: 100px; background: #34d399; border-radius: 2rem; animation: floatRotate3 5s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        .shape-4 { right: 18%; bottom: 10%; width: 140px; height: 140px; background: #a78bfa; border-radius: 50%; animation: floatRotate4 4.2s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        .shape-5 { left: 50%; top: 60%; width: 60px; height: 60px; background: #f472b6; border-radius: 1.5rem; animation: floatRotate5 3.8s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        @keyframes floatRotate1 {
+            0% { transform: translateY(0) scale(1) rotate(0deg);}
+            100% { transform: translateY(-40px) scale(1.15) rotate(20deg);}
+        }
+        @keyframes floatRotate2 {
+            0% { transform: translateY(0) scale(1) rotate(0deg);}
+            100% { transform: translateY(-30px) scale(1.1) rotate(-18deg);}
+        }
+        @keyframes floatRotate3 {
+            0% { transform: translateY(0) scale(1) rotate(0deg);}
+            100% { transform: translateY(-50px) scale(1.2) rotate(25deg);}
+        }
+        @keyframes floatRotate4 {
+            0% { transform: translateY(0) scale(1) rotate(0deg);}
+            100% { transform: translateY(-35px) scale(1.08) rotate(-15deg);}
+        }
+        @keyframes floatRotate5 {
+            0% { transform: translateY(0) scale(1) rotate(0deg);}
+            100% { transform: translateY(-25px) scale(1.18) rotate(30deg);}
+        }
+        /* Particle dots with scale and color change - each with unique color and animation */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+        }
+        .particle-1 { width: 16px; height: 16px; left: 15%; top: 70%; background: #fff; animation: particleMove1 6s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        .particle-2 { width: 10px; height: 10px; left: 80%; top: 15%; background: #a78bfa; animation: particleMove2 5.5s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        .particle-3 { width: 14px; height: 14px; left: 60%; top: 80%; background: #fbbf24; animation: particleMove3 7s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        .particle-4 { width: 9px; height: 9px; left: 35%; top: 10%; background: #34d399; animation: particleMove4 6.2s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        .particle-5 { width: 13px; height: 13px; left: 70%; top: 60%; background: #f472b6; animation: particleMove5 5.8s cubic-bezier(.4,0,.2,1) infinite alternate;}
+        @keyframes particleMove1 {
+            0% { transform: translateY(0) scale(1); background: #fff;}
+            50% { transform: translateY(-30px) scale(1.3); background: #6366f1;}
+            100% { transform: translateY(-60px) scale(1); background: #fbbf24;}
+        }
+        @keyframes particleMove2 {
+            0% { transform: translateY(0) scale(1); background: #a78bfa;}
+            50% { transform: translateY(-20px) scale(1.2); background: #f472b6;}
+            100% { transform: translateY(-40px) scale(1); background: #34d399;}
+        }
+        @keyframes particleMove3 {
+            0% { transform: translateY(0) scale(1); background: #fbbf24;}
+            50% { transform: translateY(-40px) scale(1.4); background: #a78bfa;}
+            100% { transform: translateY(-80px) scale(1); background: #6366f1;}
+        }
+        @keyframes particleMove4 {
+            0% { transform: translateY(0) scale(1); background: #34d399;}
+            50% { transform: translateY(-25px) scale(1.1); background: #f472b6;}
+            100% { transform: translateY(-50px) scale(1); background: #fff;}
+        }
+        @keyframes particleMove5 {
+            0% { transform: translateY(0) scale(1); background: #f472b6;}
+            50% { transform: translateY(-35px) scale(1.25); background: #fbbf24;}
+            100% { transform: translateY(-70px) scale(1); background: #34d399;}
+        }
+        /* Overlay for readability */
+        .overlay-gradient {
+            background: linear-gradient(90deg, rgba(49,46,129,0.85) 0%, rgba(139,92,246,0.45) 60%, rgba(236,72,153,0.35) 100%);
+        }
+
+
+    body { font-family: 'Inter', sans-serif; }
+    .animated-gradient {
+        background: linear-gradient(120deg, #6366f1, #a78bfa, #f472b6, #34d399, #fbbf24, #6366f1, #f472b6, #34d399);
+        background-size: 200% 200%;
+        animation: gradientBG 5s linear infinite alternate;
+    }
+    @keyframes gradientBG {
+        0% {background-position: 0% 100%;}
+        25% {background-position: 50% 0%;}
+        50% {background-position: 100% 100%;}
+        75% {background-position: 50% 100%;}
+        100% {background-position: 0% 100%;}
+    }
+    .slide-in-right {
+        animation: slideInRight 0.8s cubic-bezier(.4,0,.2,1) both;
+    }
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(100vw);}
+        to { opacity: 1; transform: translateX(0);}
+    }
+    .shape, .particle { pointer-events: none; }
+    .shape { position: absolute; opacity: 0.22; }
+    .shape-1 { left: 10%; top: 20%; width: 120px; height: 120px; background: #fff; border-radius: 50%; animation: floatRotate1 4s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    .shape-2 { right: 12%; top: 30%; width: 80px; height: 80px; background: #fbbf24; border-radius: 50%; animation: floatRotate2 4.5s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    .shape-3 { left: 25%; bottom: 18%; width: 100px; height: 100px; background: #34d399; border-radius: 2rem; animation: floatRotate3 5s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    .shape-4 { right: 18%; bottom: 10%; width: 140px; height: 140px; background: #a78bfa; border-radius: 50%; animation: floatRotate4 4.2s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    .shape-5 { left: 50%; top: 60%; width: 60px; height: 60px; background: #f472b6; border-radius: 1.5rem; animation: floatRotate5 3.8s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    @keyframes floatRotate1 { 0% { transform: translateY(0) scale(1) rotate(0deg);} 100% { transform: translateY(-40px) scale(1.15) rotate(20deg);} }
+    @keyframes floatRotate2 { 0% { transform: translateY(0) scale(1) rotate(0deg);} 100% { transform: translateY(-30px) scale(1.1) rotate(-18deg);} }
+    @keyframes floatRotate3 { 0% { transform: translateY(0) scale(1) rotate(0deg);} 100% { transform: translateY(-50px) scale(1.2) rotate(25deg);} }
+    @keyframes floatRotate4 { 0% { transform: translateY(0) scale(1) rotate(0deg);} 100% { transform: translateY(-35px) scale(1.08) rotate(-15deg);} }
+    @keyframes floatRotate5 { 0% { transform: translateY(0) scale(1) rotate(0deg);} 100% { transform: translateY(-25px) scale(1.18) rotate(30deg);} }
+    .particle { position: absolute; border-radius: 50%; opacity: 0.18; }
+    .particle-1 { width: 16px; height: 16px; left: 15%; top: 70%; background: #fff; animation: particleMove1 6s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    .particle-2 { width: 10px; height: 10px; left: 80%; top: 15%; background: #a78bfa; animation: particleMove2 5.5s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    .particle-3 { width: 14px; height: 14px; left: 60%; top: 80%; background: #fbbf24; animation: particleMove3 7s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    .particle-4 { width: 9px; height: 9px; left: 35%; top: 10%; background: #34d399; animation: particleMove4 6.2s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    .particle-5 { width: 13px; height: 13px; left: 70%; top: 60%; background: #f472b6; animation: particleMove5 5.8s cubic-bezier(.4,0,.2,1) infinite alternate;}
+    @keyframes particleMove1 { 0% { transform: translateY(0) scale(1); background: #fff;} 50% { transform: translateY(-30px) scale(1.3); background: #6366f1;} 100% { transform: translateY(-60px) scale(1); background: #fbbf24;} }
+    @keyframes particleMove2 { 0% { transform: translateY(0) scale(1); background: #a78bfa;} 50% { transform: translateY(-20px) scale(1.2); background: #f472b6;} 100% { transform: translateY(-40px) scale(1); background: #34d399;} }
+    @keyframes particleMove3 { 0% { transform: translateY(0) scale(1); background: #fbbf24;} 50% { transform: translateY(-40px) scale(1.4); background: #a78bfa;} 100% { transform: translateY(-80px) scale(1); background: #6366f1;} }
+    @keyframes particleMove4 { 0% { transform: translateY(0) scale(1); background: #34d399;} 50% { transform: translateY(-25px) scale(1.1); background: #f472b6;} 100% { transform: translateY(-50px) scale(1); background: #fff;} }
+    @keyframes particleMove5 { 0% { transform: translateY(0) scale(1); background: #f472b6;} 50% { transform: translateY(-35px) scale(1.25); background: #fbbf24;} 100% { transform: translateY(-70px) scale(1); background: #34d399;} }
+    .overlay-gradient {
+        background: linear-gradient(90deg, rgba(49,46,129,0.85) 0%, rgba(139,92,246,0.45) 60%, rgba(236,72,153,0.35) 100%);
+    }
+    .ticket-collapsed .ticket-fields {
+        display: none;
+    }
+    .ticket-collapsed .ticket-header {
+        cursor: pointer;
+        background: #ede9fe;
+    }
+    .ticket-expanded .ticket-header {
+        background: #c7d2fe;
+    }
+    .ticket-header {
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+
+            @keyframes fadeInDown {
+                from { opacity: 0; transform: translateY(-40px);}
+                to { opacity: 1; transform: translateY(0);}
+            }
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(40px);}
+                to { opacity: 1; transform: translateY(0);}
+            }
+            .animate-fadeInDown { animation: fadeInDown 0.8s cubic-bezier(.4,0,.2,1) 0.1s both;}
+            .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1) 0.4s both;}
+            .animate-fadeInUp2 { animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1) 0.7s both;}
+            /* Slide in from right, disappear, reappear - with color change */
+            @keyframes slideInRightColor {
+                0% { opacity: 0; transform: translateX(100px); color: #fff;}
+                15% { opacity: 1; transform: translateX(0); color: #fbbf24;}
+                35% { color: #a78bfa;}
+                55% { color: #34d399;}
+                70% { opacity: 1; transform: translateX(0); color: #f472b6;}
+                85% { opacity: 0; transform: translateX(100px); color: #fff;}
+                100% { opacity: 0; transform: translateX(100px); color: #fff;}
+            }
+            .animate-slideInRight {
+                animation: slideInRightColor 3s cubic-bezier(.4,0,.2,1) infinite;
+            }
+
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(40px);}
+                to { opacity: 1; transform: translateY(0);}
+            }
+            .animate-fadeIn { animation: fadeIn 0.4s cubic-bezier(.4,0,.2,1);}
+
+
+        body { font-family: 'Inter', sans-serif; }
+        .animated-gradient {
+            background: linear-gradient(120deg, #6366f1, #a78bfa, #f472b6, #34d399, #fbbf24, #6366f1, #f472b6, #34d399);
+            background-size: 200% 200%;
+            animation: gradientBG 5s linear infinite alternate;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 100%;}
+            25% {background-position: 50% 0%;}
+            50% {background-position: 100% 100%;}
+            75% {background-position: 50% 100%;}
+            100% {background-position: 0% 100%;}
+        }
+        .slide-in-right {
+            animation: slideInRight 0.8s cubic-bezier(.4,0,.2,1) both;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100vw);}
+            to { opacity: 1; transform: translateX(0);}
+        }
+        .overlay-gradient {
+            background: linear-gradient(90deg, rgba(49,46,129,0.85) 0%, rgba(139,92,246,0.45) 60%, rgba(236,72,153,0.35) 100%);
+        }
+        .style1 {
+            font-size: 12px;
+            font-weight: bold;
+        }
+        /* Paystack image styling */
+        .paystack-img {
+            width: 220px;
+            height: 60px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+            padding: 4px 8px;
+            display: block;
+        }
+
+        /* For image preview */
+        #eventImagePreview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 300%;
+            min-height: 200px;
+            background: #f3f4f6;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        #eventImagePreview img {
+            max-width: 200%;
+            max-height: 800px;
+            object-fit: contain;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        #eventImagePreview .placeholder {
+            color: #a1a1aa;
+            font-size: 1.1rem;
+        }
+
+
+      
+
+
+
+
+        

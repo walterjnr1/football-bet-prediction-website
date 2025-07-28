@@ -112,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sendEmail($email, $subject, $message);
     }
 
-    $ip_address = $_SERVER['REMOTE_ADDR'] ?? '';
     log_activity($dbh, $user_id, "Posted new prediction", 'predictions', $prediction_id, $ip_address);
 
     $_SESSION['toast'] = ['type'=>'success','message'=>'Prediction posted and email sent to active VIP users.'];

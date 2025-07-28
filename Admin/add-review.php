@@ -7,33 +7,29 @@ if (empty($_SESSION['user_id'])) {
   exit();
 }
 
-$current_date = date("Y-m-d H:i:s");
-$user_id = $_SESSION['user_id'];
-$ip_address = $_SERVER['REMOTE_ADDR'] ?? '';
-
 // Fetch VIP users for dropdown
 $vip_users_stmt = $dbh->prepare("SELECT id, full_name FROM users WHERE role = 'vip' ORDER BY full_name ASC");
 $vip_users_stmt->execute();
 $vip_users = $vip_users_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $selected_user_id = intval($_POST['user_id'] ?? 0);
+  $full_name = trim($_POST['full_name'] ?? '');
   $rating = intval($_POST['rating'] ?? 0);
   $comment = trim($_POST['comment'] ?? '');
 
-  if ($selected_user_id <= 0 || $rating < 1 || $rating > 5 || empty($comment)) {
+  if (empty($full_name) || $rating < 1 || $rating > 5 || empty($comment)) {
     $_SESSION['toast'] = ['type' => 'error', 'message' => 'All fields are required.'];
     header("Location: add-review");
     exit();
   }
 
   // Insert review
-  $stmt = $dbh->prepare("INSERT INTO reviews (user_id, comment, rating, created_at) VALUES (?, ?, ?, ?)");
-  $stmt->execute([$selected_user_id, $comment, $rating, $current_date]);
-
+  $stmt = $dbh->prepare("INSERT INTO reviews (full_name, comment, rating) VALUES (?, ?, ?)");
+  $stmt->execute([$full_name, $comment, $rating]);
+  $record_id = $dbh->lastInsertId();
   // Log activity
-  $action = "Added review for user ID: $selected_user_id on $current_date";
-  log_activity($dbh, $user_id, $action, 'reviews', $selected_user_id, $ip_address);
+  $action = "Added review for user: $full_name on $current_date";
+  log_activity($dbh, $user_id, $action, 'reviews', $record_id, $ip_address);
 
   $_SESSION['toast'] = ['type' => 'success', 'message' => 'Review added successfully!'];
   header("Location: add-review");
@@ -73,10 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <form method="POST">
         <div class="mb-3">
           <label for="user_id" class="form-label">Select VIP User</label>
-          <select name="user_id" id="user_id" class="form-select" required>
+          <select name="full_name" id="full_name" class="form-select" required>
             <option value="">-- Select User --</option>
             <?php foreach ($vip_users as $user): ?>
-              <option value="<?= $user['id'] ?>"><?= htmlspecialchars($user['full_name']) ?></option>
+              <option value="<?= htmlspecialchars($user['full_name']) ?>"><?= htmlspecialchars($user['full_name']) ?></option>
             <?php endforeach; ?>
           </select>
         </div>
@@ -96,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="mb-3">
           <label for="comment" class="form-label">Comment</label>
-          <textarea name="comment" id="comment" class="form-control summernote" rows="4" required></textarea>
+          <textarea name="comment" id="comment" class="form-control summernote" rows="4" maxlength="120" required></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3"><i class="bi bi-send"></i> Submit Review</button>

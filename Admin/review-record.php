@@ -7,7 +7,7 @@ if (empty($_SESSION['user_id'])) {
 }
 
 // Fetch reviews with user info
-$stmt = $dbh->prepare("SELECT reviews.*, users.full_name FROM reviews JOIN users ON reviews.user_id = users.id ORDER BY reviews.created_at DESC");
+$stmt = $dbh->prepare("SELECT * FROM reviews ORDER BY created_at DESC");
 $stmt->execute();
 $reviewList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>

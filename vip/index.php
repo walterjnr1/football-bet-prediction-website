@@ -7,12 +7,13 @@ if (empty($_SESSION['user_id'])) {
 
 // Handle review submission
 if (isset($_POST['btnreview'])) {
+    $full_name = $_POST['full_name'];
     $comment = $_POST['comment'];
     $rating = $_POST['rating'];
 
-    $sql = "INSERT INTO reviews (user_id, comment, rating) VALUES (:user_id, :comment, :rating)";
+    $sql = "INSERT INTO reviews (full_name, comment, rating) VALUES (:full_name, :comment, :rating)";
     $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bindParam(':full_name', $full_name);
     $stmt->bindParam(':comment', $comment);
     $stmt->bindParam(':rating', $rating);
 

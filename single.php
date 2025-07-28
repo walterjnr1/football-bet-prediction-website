@@ -1,45 +1,18 @@
+<?php
+include('config.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>SUREFIXEDWIN</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
-
-  <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-  <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
-  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
-  <link rel="stylesheet" href="css/aos.css">
-
-  <link rel="stylesheet" href="css/style.css">
-
-<!-- Default favicon -->
-<link rel="icon" href="favicon_io/favicon-32x32.png" type="image/x-icon">
-
-<!-- Font Awesome for star icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-
+  <title>Blog Posts - <?php echo $app_name; ?></title>
+  <?php include('partials/head.php'); ?>
 </head>
 
 <body>
-
   <div class="site-wrap">
 
+    <!-- Navbar -->
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close">
@@ -49,33 +22,22 @@
       <div class="site-mobile-menu-body"></div>
     </div>
 
-
     <header class="site-navbar py-4" role="banner">
-
       <div class="container">
         <div class="d-flex align-items-center">
           <div class="site-logo">
-            <a href="index.html">
-              <img src="images/SURE FIXED WIN New (1).png" alt="Logo">
+            <a href="index">
+              <img src="<?php echo $app_logo; ?>" alt="Logo">
             </a>
           </div>
           <div class="ml-auto">
             <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="About-us.html" class="nav-link">About Us</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li ><a href="matches.html" class="nav-link">Free Tips</a></li>
-                <li><a href="Vip-Access.html" class="nav-link vip-link">JOIN VIP</a></li>
-              </ul>
+              <?php include('partials/navbar.php'); ?>
             </nav>
-
-            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white"><span
-                class="icon-menu h3 text-white"></span></a>
+            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white"><span class="icon-menu h3 text-white"></span></a>
           </div>
         </div>
       </div>
-
     </header>
 
     <div class="hero overlay" style="background-image: url('images/bg_3.jpg');">
@@ -83,8 +45,13 @@
         <div class="row align-items-center">
           <div class="col-lg-9 mx-auto text-center">
             <h1 class="text-white">Our Blog Posts</h1>
-            <p><span>June 20, 2025</span> <span class="mx-3">&bullet;</span> <span>By Admin</span></p>
-          </div>
+<?php
+  $post_date = date('F j, Y', strtotime($row['created_at']));
+  $author = htmlspecialchars($row['author'] ?? 'Admin');
+?>
+
+<p>  <span><?= $post_date ?></span>  <span class="mx-3">&bullet;</span>  <span>By <?= $author ?></span></p>          
+</div>
         </div>
       </div>
     </div>
@@ -197,98 +164,20 @@
         </div>
       </div>
     </div>
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/2349025831669?text=Hello%2C%20I%27m%20interested%20in%20your%20VIP%20access."
-class="whatsapp-float"
-target="_blank"
-title="Chat with us on WhatsApp">
-<img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp Icon" />
-</a>
 
+       <!-- Floating WhatsApp Button -->
+    <?php include('partials/whatsapp.php'); ?>
 
-
-
-
-<footer class="footer-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3">
-        <div class="widget mb-3">
-          <h3>News</h3>
-          <ul class="list-unstyled links">
-            <li><a href="single.html">All News</a></li>
-            <li><a href="Terms.html">Terms & Conditions</a></li>
-            <li><a href="Disclaimer.html">Disclaimer</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="widget mb-3">
-          <h3>Tickets</h3>
-          <ul class="list-unstyled links">
-            <li><a href="Vip-Access.html">VIP Ticket</a></li>
-            <li><a href="contact.html">Contact &amp; Booking</a></li>
-            <li><a href="https://wa.me/2349025831669?text=Hello%2C%20I%27m%20interested%20in%20your%20VIP%20access.">Contact Admin</a></li>
-          </ul>
-        </div>
-      </div>
-      
-
-      <div class="col-lg-3">
-        <div class="widget mb-3">
-          <h3>Social</h3>
-          <ul class="list-unstyled links">
-            <li><a href="https://wa.me/2349025831669?text=Hello%2C%20I%27m%20interested%20in%20your%20VIP%20access.">WhatsApp</a></li>
-            <li><a href="https://t.me/joinsurefixedwin">Telegram</a></li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="row text-center">
-      <div class="col-md-12">
-        <div class=" pt-5">
-          <p>
-           
-           Copyright &copy;
-           <script>
-             document.write(new Date().getFullYear());
-           </script> All rights reserved | SUREFIXEDWIN <i 
-             aria-hidden="true"></i><a href="#" target="_blank"></a>
-         
-          </p>
-        </div>
-      </div>
-
-    </div>
+    <!-- Footer -->
+    <footer class="footer-section">
+      <?php include('partials/footer.php'); ?>
+    </footer>
   </div>
-</footer>
 
+  <!-- Scripts -->
+  <?php include('partials/sweetalert.php'); ?>
+  <?php include('partials/script.php'); ?>
 
-
-
-  </div>
-  <!-- .site-wrap -->
-
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/jquery-ui.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/jquery.countdown.min.js"></script>
-  <script src="js/bootstrap-datepicker.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.fancybox.min.js"></script>
-  <script src="js/jquery.sticky.js"></script>
-  <script src="js/jquery.mb.YTPlayer.min.js"></script>
-
-
-  <script src="js/main.js"></script>
-
+  
 </body>
-
 </html>

@@ -16,8 +16,8 @@ function sendEmail($to, $subject, $body,$backupFile = null) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'newleastpaysolution@gmail.com';
-        $mail->Password   = 'rmspelngdvwrobt';
+        $mail->Username   = 'ucnewspro@gmail.com';
+        $mail->Password   = 'qbffuhedyrxdcciw';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
@@ -41,6 +41,8 @@ if ($backupFile && file_exists($backupFile)) {
         return false;
     }
 }
+
+//yahoo app password = kyggwbzkptxvifwt
 ?>
 
 

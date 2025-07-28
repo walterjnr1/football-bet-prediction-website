@@ -1,0 +1,67 @@
+      /* Modal animation and custom style */
+      @keyframes modalFadeIn {
+         from { opacity: 0; transform: translateY(40px) scale(0.98);}
+         to { opacity: 1; transform: translateY(0) scale(1);}
+      }
+      .modal-beauty {
+         background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+         box-shadow: 0 10px 32px 0 rgba(80, 80, 180, 0.15), 0 2px 4px 0 rgba(80, 80, 180, 0.10);
+         border-radius: 1.5rem;
+         animation: modalFadeIn 0.35s cubic-bezier(.4,2,.6,1) 1;
+         border: 1px solid #e0e7ff;
+         position: relative;
+      }
+      .modal-beauty input, .modal-beauty textarea {
+         background: #f1f5f9;
+         border: 1px solid #c7d2fe;
+      }
+      .modal-beauty input:focus, .modal-beauty textarea:focus {
+         border-color: #6366f1;
+         background: #fff;
+      }
+      .modal-beauty .modal-header {
+         background: linear-gradient(90deg, #6366f1 0%, #a78bfa 100%);
+         color: #fff;
+         border-radius: 1.5rem 1.5rem 0 0;
+         padding: 1.5rem 2rem 1rem 2rem;
+         margin: -2rem -2rem 1.5rem -2rem;
+         box-shadow: 0 2px 8px 0 rgba(80, 80, 180, 0.08);
+      }
+      .modal-beauty .close-btn {
+         position: absolute;
+         top: 1.2rem;
+         right: 1.5rem;
+         font-size: 2rem;
+         color: #c7d2fe;
+         background: none;
+         border: none;
+         cursor: pointer;
+         transition: color 0.2s;
+      }
+      .modal-beauty .close-btn:hover {
+         color: #fff;
+      }
+      /* Center modal using flexbox */
+      #contactModal {
+         display: none;
+         position: fixed;
+         inset: 0;
+         z-index: 50;
+         background: rgba(0,0,0,0.5);
+         justify-content: center;
+         align-items: center;
+      }
+      #contactModal.show {
+         display: flex;
+      }
+      @media (max-width: 640px) {
+         .modal-beauty {
+            padding: 1.2rem !important;
+            border-radius: 1rem;
+         }
+         .modal-beauty .modal-header {
+            padding: 1rem 1.2rem 0.7rem 1.2rem;
+            margin: -1.2rem -1.2rem 1rem -1.2rem;
+            border-radius: 1rem 1rem 0 0;
+         }
+      }
