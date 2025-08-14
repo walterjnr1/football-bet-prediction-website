@@ -3,8 +3,8 @@
         <a href="#"><img src="../<?php echo $app_logo; ?>" alt="Logo"></a>
       </div>
       <div class="nav-links">
-        <a href="index" target="_blank">Home</a>
-        <a href="livescores" target="_blank">Live Score</a>    
+        <a href="index">Home</a>
+        <a href="livescores">Live Score</a>    
         <a href="contact-us">Contact Us</a>
       </div>
     </div>

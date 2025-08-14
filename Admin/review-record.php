@@ -53,8 +53,10 @@ $reviewList = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tr>
               <th>#</th>
               <th>User</th>
+              <th>Email</th>
               <th>Rating</th>
               <th>Comment</th>
+              <th>Type</th>
               <th>Date</th>
               <th>Action</th>
             </tr>
@@ -65,11 +67,14 @@ $reviewList = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <tr>
                 <td><?= $index + 1 ?></td>
                 <td><?= htmlspecialchars($review['full_name']) ?></td>
+                <td><?= htmlspecialchars($review['email']) ?></td>
                 <td>
                   <?= str_repeat('★', $review['rating']) . str_repeat('☆', 5 - $review['rating']) ?>
                   (<?= $review['rating'] ?>/5)
                 </td>
                 <td><?= nl2br(htmlspecialchars($review['comment'])) ?></td>
+                 <td><?= nl2br(htmlspecialchars($review['type'])) ?></td>
+
                 <td><?= date('Y-m-d H:i', strtotime($review['created_at'])) ?></td>
                 <td>
                   <a href="edit-review?id=<?= $review['id'] ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a>

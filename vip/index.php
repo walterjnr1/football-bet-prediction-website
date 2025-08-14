@@ -34,7 +34,7 @@ if (isset($_POST['btnreview'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title><?php echo $app_name; ?> - VIP Dashboard</title>
+    <title>VIP Dashboard-<?php echo $app_name; ?> </title>
     <?php include 'partials/head.php'; ?>
 </head>
 <body>
@@ -44,7 +44,7 @@ if (isset($_POST['btnreview'])) {
     </div>
 
     <div class="welcome-bar">
-        You are welcome to <?php echo $app_name; ?> VIP Room, we provide 2 fixed correct scores daily. Ticket price is...
+        You are welcome to <?php echo $app_name; ?> VIP Dashboard, we provide Premium tips daily.
     </div>
 
     <div class="schedule-bar">

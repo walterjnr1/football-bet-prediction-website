@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   // Insert review
-  $stmt = $dbh->prepare("INSERT INTO reviews (full_name, comment, rating) VALUES (?, ?, ?)");
-  $stmt->execute([$full_name, $comment, $rating]);
+  $stmt = $dbh->prepare("INSERT INTO reviews (full_name, comment, rating,type) VALUES (?, ?, ?,?)");
+  $stmt->execute([$full_name, $comment, $rating,'testimonial']);
   $record_id = $dbh->lastInsertId();
   // Log activity
   $action = "Added review for user: $full_name on $current_date";

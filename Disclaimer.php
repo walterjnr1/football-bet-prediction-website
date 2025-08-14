@@ -1,142 +1,101 @@
 <?php
 include('config.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Disclaimer - <?php echo $app_name; ?></title>
-  <?php include('partials/head.php'); ?>
+<title>Disclaimer - <?php echo $app_name; ?></title>
+<?php include('partials/head.php'); ?>
 </head>
-
 <body>
-  <div class="site-wrap">
-
-    <!-- Navbar -->
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
+    <div class="topbar">
+        <?php include('partials/topbar.php'); ?>
     </div>
-
-    <header class="site-navbar py-4" role="banner">
-      <div class="container">
-        <div class="d-flex align-items-center">
-          <div class="site-logo">
-            <a href="index">
-              <img src="<?php echo $app_logo; ?>" alt="Logo">
-            </a>
-          </div>
-          <div class="ml-auto">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <?php include('partials/navbar.php'); ?>
-            </nav>
-            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white"><span class="icon-menu h3 text-white"></span></a>
-          </div>
-        </div>
-      </div>
-    </header>
-
-
-    <div class="hero overlay" style="background-image: url('images/bg_3.jpg');">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-5 mx-auto text-center">
-            <h1 class="text-white">Disclaimer</h1>
-           
-          </div>
-        </div>
-      </div>
+    <div class="logo">
+        <img src="<?php echo $app_logo; ?>" alt="Logo">
     </div>
+    <nav class="navbar">
+        <?php include('partials/navbar.php'); ?>
+    </nav>
+
+    <section class="hero">
+        <p>&nbsp;</p>
+        <h1>Disclaimer</h1>
+        <p>By using <?php echo $app_name; ?>, you acknowledge and agree to the disclaimers stated below.</p>
+    </section>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
 
     <section class="terms-section">
-     
-    
-      <div class="terms-box">
+        <h2>Important Legal Disclaimer</h2>
         <p>
-            Disclaimer
-            Welcome to <?php echo $app_name; ?>. Please read this important information carefully.
-
-        </p>
-    
-    
-        <h3>Insights, Not Guarantees
-        </h3>
-    
-        <p>
-          <strong></strong> All soccer predictions, correct score tips, fixed match claims, and live score updates shared on SureFixedWin (the “Website”) are offered to help inform and entertain you. While we aim for accuracy, outcomes in sports can never be guaranteed.
-
-        </p>
-    
-
-        <h3>Betting Involves Risk
-        </h3>
-    
-        <p>
-          <strong></strong> Betting and gambling come with inherent risks. Past performance does not guarantee future results. Our analysis, statistics, and expert opinions are not financial or betting advice. Always use your own judgment before placing any wagers.
-
-        </p>
-    
-      
-        <h3>Fixed Matches – Proceed with Caution
-        </h3>
-    
-        <p>
-          <strong></strong> We do not encourage or endorse illegal or unethical betting practices. Claims about “fixed matches” should be approached carefully, and you should always do your own research. SureFixedWin accepts no responsibility for losses resulting from reliance on such information.
-
-
+            <?php echo $app_name; ?> provides football predictions, statistics, and betting tips for informational and entertainment purposes only.
+            We are not a bookmaker, betting operator, or gambling service provider, and we do not encourage illegal betting in any form.
         </p>
 
-        <h3>Age & Responsible Gambling
+        <h3>1. No Guarantee of Winning</h3>
+        <ul>
+            <li>Our predictions are based on data analysis, statistics, and expert opinions, but sports events are inherently unpredictable.</li>
+            <li>Past performance is not indicative of future results. Even the most accurate prediction can be wrong.</li>
+            <li>Any financial gain or loss incurred from using our predictions is entirely at the user’s own risk.</li>
+        </ul>
 
-        </h3>
-    
-        <p>
-          <strong></strong> This Website is intended only for users aged 18 and above (or the legal gambling age in your jurisdiction). We strongly advocate for responsible gambling. If you believe you might have a gambling problem, please seek help from a recognized responsible gambling organization.
-        </p>
-    
-       
-        <h3>Limitation of Liability
-        </h3>
-    
-        <p>
-          <strong></strong> By using this Website, you agree that <?php echo $app_name; ?>, its owners, affiliates, and partners shall not be held liable for any direct, indirect, or consequential losses—including financial losses—arising from your use of, or reliance on, the information provided. All betting decisions are your sole responsibility.
+        <h3>2. Age Restriction</h3>
+        <ul>
+            <li>Services on <?php echo $app_name; ?> are intended for users who are 18 years or older (or legal gambling age in their jurisdiction).</li>
+            <li>By accessing our services, you confirm that you meet the legal age requirements for betting in your country or region.</li>
+        </ul>
 
-        </p>
-    
-        <h3>Third-Party Links
-        </h3>
-        <p>
-          <strong></strong> Our Website may include links to third-party websites. We do not control or take responsibility for the content, services, or privacy policies of these external sites.
-        </p>
+        <h3>3. Local Law Compliance</h3>
+        <ul>
+            <li>It is your sole responsibility to ensure that the use of our website and services is legal in your jurisdiction.</li>
+            <li>We are not responsible for any violation of laws by users who access our content from regions where gambling or betting is prohibited.</li>
+        </ul>
 
-        <h3> Updates to This Disclaimer
-        </h3>
-        <p>
-          <strong></strong>  <?php echo $app_name; ?> reserves the right to update or revise this disclaimer at any time without prior notice. Continued use of the Website means you accept these terms.
-        </p><br>
+        <h3>4. Financial Risk Warning</h3>
+        <ul>
+            <li>Sports betting involves risk and can result in financial loss. You should only stake amounts you can afford to lose.</li>
+            <li>We strongly advise responsible betting. If you feel you may have a gambling problem, seek help from professional support organizations.</li>
+        </ul>
 
-    <p> <i><b>N/B: If you do not agree with any part of this disclaimer, please do not use our services.</b></i></p> 
-      </div>
+        <h3>5. Third-Party Links & Services</h3>
+        <ul>
+            <li>Our website may contain links to third-party websites, bookmakers, or affiliates. These are provided for convenience and informational purposes only.</li>
+            <li>We are not responsible for the content, privacy policies, or practices of third-party websites.</li>
+        </ul>
+
+        <h3>6. Accuracy of Information</h3>
+        <ul>
+            <li>While we strive to ensure all predictions, odds, and statistics are accurate, we make no guarantees regarding the completeness or reliability of the information provided.</li>
+            <li>Errors or omissions may occur, and we reserve the right to correct them at any time without notice.</li>
+        </ul>
+
+        <h3>7. Limitation of Liability</h3>
+        <ul>
+            <li><?php echo $app_name; ?>, its owners, employees, and partners shall not be held liable for any loss, injury, or damage resulting directly or indirectly from the use of our services.</li>
+            <li>All decisions to bet or gamble are taken solely by the user and at their own risk.</li>
+        </ul>
+
+        <h3>8. Intellectual Property</h3>
+        <ul>
+            <li>All content on <?php echo $app_name; ?>, including predictions, graphics, and text, is owned by us and protected by copyright laws.</li>
+            <li>Unauthorized reproduction or redistribution is strictly prohibited.</li>
+        </ul>
+
+        <h3>9. Changes to This Disclaimer</h3>
+        <ul>
+            <li>We reserve the right to update or modify this disclaimer at any time without prior notice.</li>
+            <li>It is your responsibility to check this page periodically for updates.</li>
+        </ul>
+
+        <p><strong>Final Note:</strong> By using <?php echo $app_name; ?>, you agree that you understand and accept all of the above disclaimers. If you do not agree, you must stop using our services immediately.</p>
+
+        <p>&nbsp;</p>
     </section>
 
-    
-   <!-- Floating WhatsApp Button -->
     <?php include('partials/whatsapp.php'); ?>
-
-    <!-- Footer -->
-    <footer class="footer-section">
-      <?php include('partials/footer.php'); ?>
+    <footer>
+        <?php include('partials/footer.php'); ?>
     </footer>
-  </div>
-
-  <!-- Scripts -->
-  <?php include('partials/sweetalert.php'); ?>
-  <?php include('partials/script.php'); ?>
-
-  
 </body>
 </html>

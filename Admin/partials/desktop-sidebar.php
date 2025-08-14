@@ -71,8 +71,12 @@
     <a href="news-record">News Record</a>
   </div>
 
+  <!-- bookings Management Dropdown -->
+  <p><a href="add-booking"><i class="lni lni-code"></i> Booking Code Management</a>
+
   <p><a href="website-settings"><i class="lni lni-world"></i> Website Management</a>
-      <a href="logout"><i class="lni lni-exit text-danger"></i> Logout</a>
+      
+  <a href="logout"><i class="lni lni-exit text-danger"></i> Logout</a>
     
     <!-- Spacer -->
   </p>

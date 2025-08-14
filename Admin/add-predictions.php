@@ -55,9 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $dbh->prepare("
         INSERT INTO predictions
-          (type, sport, match_date, league_id, team_home_id, team_away_id, prediction_text, odds, result, score)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', NULL)
-    ")->execute([$type, $sport, $match_date, $league_id, $home_id, $away_id, $prediction_text, $odds]);
+          (user_id,type, sport, match_date, league_id, team_home_id, team_away_id, prediction_text, odds, result, score)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', NULL)
+    ")->execute([$user_id, $type, $sport, $match_date, $league_id, $home_id, $away_id, $prediction_text, $odds]);
 
     $prediction_id = $dbh->lastInsertId();
     $home_team = getTeamName($dbh, $home_id);

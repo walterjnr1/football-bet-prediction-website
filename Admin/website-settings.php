@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $site_url = $_POST['site_url'] ?? '';
     $whatsapp_phone = $_POST['whatsapp_phone'] ?? '';
     $logo = $row_website['logo']; // Default to existing logo
+    $paystack_secret_key = $_POST['paystack_secret_key'] ?? '';
+    $paystack_public_key = $_POST['paystack_public_key'] ?? '';
 
     // Handle logo upload
     if (!empty($_FILES['logo']['name'])) {
@@ -26,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Update DB
-    $update = $dbh->prepare("UPDATE website_settings SET site_name = ?, site_email = ?, logo = ?, site_url = ?, whatsapp_phone = ? WHERE id = 1");
-    $success = $update->execute([$site_name, $site_email, $logo, $site_url, $whatsapp_phone]);
+    $update = $dbh->prepare("UPDATE website_settings SET site_name = ?,paystack_secret_key=?,paystack_public_key=?, site_email = ?, logo = ?, site_url = ?, whatsapp_phone = ? WHERE id = 1");
+    $success = $update->execute([$site_name,$paystack_secret_key,$paystack_public_key, $site_email, $logo, $site_url, $whatsapp_phone]);
 
 
     if ($success) {
@@ -102,6 +104,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="tel" class="form-control" name="whatsapp_phone" id="whatsapp_phone" value="<?= htmlspecialchars($row_website['whatsapp_phone']) ?>">
         </div>
 
+         <div class="mb-3">
+          <label for="paystack_public_key" class="form-label">Paystack Public Key</label>
+          <input type="text" class="form-control" name="paystack_public_key" id="paystack_public_key" value="<?= htmlspecialchars($row_website['paystack_public_key']) ?>">
+        </div>
+         <div class="mb-3">
+          <label for="paystack_secret_key" class="form-label">Paystack Secret Key</label>
+          <input type="text" class="form-control" name="paystack_secret_key" id="paystack_secret_key" value="<?= htmlspecialchars($row_website['paystack_secret_key']) ?>">
+        </div>
         <button type="submit" class="btn btn-success mt-3"><i class="bi bi-save"></i> Save Settings</button>
       </form>
     </div>

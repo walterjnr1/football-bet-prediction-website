@@ -1,0 +1,100 @@
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container-live {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      color: #2d8cf0;
+      margin-bottom: 20px;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .tab-button {
+      background: #2d8cf0;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 5px;
+    }
+    .tab-button.active {
+      background: #1a6fc2;
+    }
+    .league-header {
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #2d8cf0;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+    .match-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+      padding: 15px 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .teams {
+      font-weight: 600;
+      color: #444;
+    }
+    .score {
+      font-size: 20px;
+      font-weight: bold;
+      color: #111;
+    }
+    .status {
+      font-size: 13px;
+      color: #888;
+    }
+    .pagination {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .pagination button {
+      background: #2d8cf0;
+      color: white;
+      border: none;
+      margin: 0 5px;
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .pagination button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    footer {
+      background: #000;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 60px;
+    }
+    @media (max-width: 600px) {
+      .match-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }

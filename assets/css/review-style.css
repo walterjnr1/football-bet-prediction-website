@@ -1,0 +1,15 @@
+            .review-input {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box; /* ensures border & padding don't change total width */
+            }
+            .review-group {
+                margin-bottom: 10px;
+            }
+            .review-label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }

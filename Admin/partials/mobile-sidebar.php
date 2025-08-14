@@ -62,6 +62,11 @@
   </div>
 
   <a href="changepassword"><i class="lni lni-lock-alt"></i> Change Password</a>
+
+    <!-- bookings Management Dropdown -->
+  <p><a href="add-booking"><i class="lni lni-code"></i> Booking Code Management</a>
+
+
   <a href="website-settings"><i class="lni lni-cogs"></i> Website Management</a>
 
   <!-- News Management -->

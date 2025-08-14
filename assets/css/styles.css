@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Confirm Bet Prediction - Get the best tips from professional betting tipsters." />
-    <meta name="keywords" content="sports prediction, bet tips, confirm bet, premium tips" />
-    <meta name="author" content="Confirm Bet Prediction" />
-    <title>Confirm Bet Prediction</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-      
+    
                 body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -129,7 +118,7 @@
             display: block;
         }
         .hero {
-            background: url('images/bg_1.jpg') no-repeat center center/cover;
+            background: url('../../images/bg_1.jpg') no-repeat center center/cover;
             color: white;
             text-align: center;
             padding: 10rem 2rem 6rem;
@@ -723,119 +712,3 @@
                 min-width: 0;
             }
         }
-    </style>
-</head>
-<body>
-    <div class="topbar">
-        <div>📞 +234 800 000 0000 | 📧 support@confirmbet.com</div>
-        <div id="datetime"></div>
-    </div>
-    <div class="logo">
-        <img src="images/logo_2.png" alt="Logo">
-    </div>
-    <nav class="navbar">
-        <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Livescore</a></li>
-            <li tabindex="0">
-                <a href="#">Tipster ▾</a>
-                <div class="dropdown-content">
-                    <a href="#">Tipster Leaderboard</a>
-                    <a href="#">Become a Tipster</a>
-                    <a href="#">Tipster Login</a>
-                </div>
-            </li>
-            <li><a href="#">Free Tips</a></li>
-            <li><a href="#">Get Premium Tips</a></li>
-            <li><a href="#">Pricing Plan</a></li>
-            <li><a href="#">Contact Us</a></li>
-        </ul>
-    </nav>
-    <!-- ...rest of your HTML remains unchanged... -->
-    <section class="hero">
-        <h1>Get probable winning tips from $1 Platform for sports prediction tipsters</h1>
-        <p>Get probable winning tips from professional betting tipsters across all sports and offers from leading bookmakers!</p>
-        <div class="buttons">
-            <button>Subscribe Now</button>
-            <button>How We Work</button>
-            <button>Join Telegram</button>
-        </div>
-    </section>
-    
-   
-    
- 
- 
-    <section class="register-section">
-        <h2>Become a Registered User</h2>
-        <p style="font-size:1.08rem; color:#444; max-width:400px; margin:0 auto;">
-            Register now to access premium tips, track your predictions, and join our tipster leaderboard!
-        </p>
-        <form class="register-form" id="register-form" autocomplete="off">
-            <input type="text" name="fullname" placeholder="Full Name" required />
-            <input type="email" name="email" placeholder="Email Address" required />
-            <input type="password" name="password" placeholder="Password" required minlength="6" />
-            <button type="submit">Register</button>
-        </form>
-        <div id="register-message" style="margin-top:1rem; color:#3a7d3a; font-weight:bold; display:none;"></div>
-    </section>
-    
-    <a href="https://wa.me/2348000000000" class="floating-whatsapp" target="_blank" title="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    <footer>
-        <div class="footer-flex">
-            <div class="footer-col">
-                <h3>Confirm Bet Prediction</h3>
-                <p>Reliable betting tips across all sports.<br>
-                📍 123 Sports Avenue, Lagos, Nigeria</p>
-                <p>📞 +234 800 000 0000<br>📧 support@confirmbet.com</p>
-            </div>
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">All News</a></li>
-                    <li><a href="#">Terms &amp; Conditions</a></li>
-                    <li><a href="#">Disclaimer</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Follow Us</h3>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h3>Newsletter</h3>
-                <form class="footer-newsletter">
-                    <input type="email" placeholder="Enter your email" required />
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2025 Confirm Bet Prediction. All rights reserved.
-        </div>
-    </footer>
-    <script>
-        // DateTime
-        const dt = new Date();
-        document.getElementById("datetime").innerText = dt.toDateString() + ' ' + dt.toLocaleTimeString();
-
-        // Newsletter AJAX (demo only)
-        // If you have a newsletter form with id="newsletter-form", add the handler here
-
-        // Register AJAX (demo only)
-        document.getElementById('register-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var name = this.fullname.value;
-            document.getElementById('register-message').style.display = 'block';
-            document.getElementById('register-message').innerText = "Registration successful! Welcome, " + name + ".";
-            this.reset();
-        });
-    </script>
-</body>
-</html>

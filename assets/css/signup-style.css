@@ -1,0 +1,40 @@
+    .register-section {
+        max-width: 420px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.05);
+    }
+    .register-section h2 {
+        text-align: center;
+        color: #2d8cf0;
+        margin-bottom: 1rem;
+    }
+    .register-section p {
+        text-align: center;
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+    }
+    .register-section input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 1rem;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 0.95rem;
+    }
+    .register-section button {
+        width: 100%;
+        padding: 10px;
+        background: #2d8cf0;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+    .register-section button:hover {
+        background: #1a6fd1;
+    }

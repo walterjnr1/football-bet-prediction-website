@@ -1,7 +1,9 @@
-<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index" class="nav-link">Home</a></li>
-                <li><a href="About-us" class="nav-link">About Us</a></li>
-                <li><a href="contact" class="nav-link">Contact</a></li>
-                <li ><a href="matches" class="nav-link">Free Tips</a></li>
-                <li><a href="Vip-Access" class="nav-link vip-link">JOIN VIP</a></li>
-              </ul>
+<ul>
+            <li><a href="index">Home</a></li>
+            <li><a href="livescore">Livescore</a></li>
+         <li><a href="signup">Become a VIP user</a></li>
+            <li><a href="free-predictions">Free Tips</a></li>
+            <li><a href="vip/subscription">Subscribe</a></li>
+            <li><a href="#pricing">Pricing Plan</a></li>
+            <li><a href="contact">Contact Us</a></li>
+        </ul>

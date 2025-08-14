@@ -1,52 +1,34 @@
-
-    <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="widget mb-3">
-              <h3>News</h3>
-              <ul class="list-unstyled links">
-                <li><a href="single">All News</a></li>
-                <li><a href="Terms">Terms & Conditions</a></li>
-                <li><a href="Disclaimer">Disclaimer</a></li>
-              </ul>
+<div class="footer-flex">
+            <div class="footer-col">
+                <h3><?php echo $row_website['site_name']; ?></h3>
+                <p>Reliable betting tips across all sports.<br>
+                📍 <?php echo $row_website['address']; ?></p>
+                <p>📞 <?php echo $row_website['phone1']; ?><br>📧 <?php echo $row_website['site_email']; ?></p>
             </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="widget mb-3">
-              <h3>Tickets</h3>
-              <ul class="list-unstyled links">
-                <li><a href="Vip-Access">VIP Ticket</a></li>
-                <li><a href="contact">Contact &amp; Booking</a></li>
-                <li><a href="https://wa.me/<?php echo $row_website['whatsapp_phone']; ?>?text=Hello, i am interested in your VIP Access.">Contact Admin</a></li>
-              </ul>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index#news">All News</a></li>
+                    <li><a href="terms">Terms &amp; Conditions</a></li>
+                    <li><a href="disclaimer">Disclaimer</a></li>
+                </ul>
             </div>
-          </div>
-          
-
-          <div class="col-lg-3">
-            <div class="widget mb-3">
-              <h3>Social</h3>
-              <ul class="list-unstyled links">
-                <li><a href="https://wa.me/<?php echo $row_website['whatsapp_phone']; ?>?text=Hello, i am interested in your VIP Access.">WhatsApp</a></li>
-                <li><a href="https://t.me/joinsurefixedwin">Telegram</a></li>
-              </ul>
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
-          </div>
-
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <form class="footer-newsletter">
+                    <input type="email" placeholder="Enter your email" required />
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
         </div>
-
-        <div class="row text-center">
-          <div class="col-md-12">
-            <div class=" pt-5">
-              <p>
-               
-               Copyright &copy;
-               <?php echo date('Y'); ?> All rights reserved | <?php echo $app_name; ?> <i
-                 aria-hidden="true"></i><a href="#" target="_blank"></a>
-             
-              </p>
-            </div>
-          </div>
-
+        <div class="footer-bottom">
+            &copy; <?php echo date('Y'); ?> <?php echo $row_website['site_name']; ?>. All rights reserved.
         </div>
-      </div>

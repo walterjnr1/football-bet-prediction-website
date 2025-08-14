@@ -1,312 +1,81 @@
 <?php
-// Fetch user's payment stage
-$user_id = $row_user['id'];
-$sql_stage = "SELECT current_stage FROM vip_payment_stages WHERE user_id = :user_id LIMIT 1";
-$stmt_stage = $dbh->prepare($sql_stage);
-$stmt_stage->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-$stmt_stage->execute();
-$current_stage = $stmt_stage->fetchColumn();
 
-// Modal config based on stage
-$modalConfig = [
-    'initial' => [
-        'onload' => [
-            'title' => 'Congratulations!',
-            'desc' => "Congratulations for your initial payment. You are one step closer to accessing today's premium tips. Please proceed to the next stage.",
-            'link_text' => '(Click to View Match)',
-            'whatsapp_text' => "Good day, my Name is %s, a VIP user on your website %s. I would like to make payment for clearance fee",
-            'next_modal' => [
-                'msg' => 'Oops you haven’t paid for clearance fee, Click here to pay.',
-                'whatsapp_text' => "Good day, my Name is %s, a VIP user on your website %s. I would like to make payment for clearance fee"
-            ]
-        ]
-    ],
-    'clearance_fee' => [
-        'onload' => [
-            'title' => 'Congratulations!',
-            'desc' => "Congratulations for paying your clearance fee. Please proceed to the next stage to unlock today's premium tips.",
-            'link_text' => 'Click to Continue',
-            'whatsapp_text' => "Good day, my Name is %s, a VIP user on your website %s. I would like to make payment for fifa fee",
-            'next_modal' => [
-                'msg' => 'Oops you haven’t paid for fifa fee, Click here to pay.',
-                'whatsapp_text' => "Good day, my Name is %s, a VIP user on your website %s. I would like to make payment for fifa fee"
-            ]
-        ]
-    ],
-    'fifa_fee' => [
-        'onload' => [
-            'title' => 'Congratulations!',
-            'desc' => "Congratulations for paying your FIFA fee. Please proceed to the next stage to unlock today's premium tips.",
-            'link_text' => 'Click to Continue',
-            'whatsapp_text' => "Good day, my Name is %s, a VIP user on your website %s. I would like to make payment for delivery fee",
-            'next_modal' => [
-                'msg' => 'Oops you haven’t paid for delivery fee, Click here to pay.',
-                'whatsapp_text' => "Good day, my Name is %s, a VIP user on your website %s. I would like to make payment for delivery fee"
-            ]
-        ]
-    ],
-    'delivery_fee' => [
-        'onload' => [
-            'title' => 'Congratulations!',
-            'desc' => "Congratulations for paying your delivery fee. Please proceed to the next stage to unlock today's premium tips.",
-            'link_text' => 'Click to Continue',
-            'whatsapp_text' => "Good day, my Name is %s, a VIP user on your website %s. I would like to make payment for delivery fee",
-            'next_modal' => [
-                'msg' => 'Oops you haven’t paid for delivery fee, Click here to pay.',
-                'whatsapp_text' => "Good day, my Name is %s, a VIP user on your website %s. I would like to make payment for delivery fee"
-            ]
-        ]
-    ],
-    'completed' => [
-        'onload' => [
-            'title' => 'Congratulations!',
-            'desc' => "You have successfully paid Delivery fee and qualified to view today's games. Enjoy your access to premium tips!",
-            'link_text' => 'Click to view games',
-            'whatsapp_text' => "",
-            'next_modal' => [
-                'msg' => "Today's Predictions",
-                'show_predictions' => true
-            ]
-        ]
-    ]
-];
+// Subscription details
+$sql = " SELECT s.end_date, p.name AS plan_name 
+         FROM subscriptions s 
+         JOIN plans p ON s.plan_id = p.id
+         WHERE s.user_id = :user_id 
+         ORDER BY s.id DESC 
+         LIMIT 1";
+$stmt = $dbh->prepare($sql);
+$stmt->execute(['user_id' => $user_id]);
+$subscription = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Get config for current stage
-$stageConfig = isset($modalConfig[$current_stage]) ? $modalConfig[$current_stage]['onload'] : null;
+$expiry_date = $subscription['end_date'] ?? null;
+$plan_name   = $subscription['plan_name'] ?? null;
+
+$is_expired = false;
+if ($expiry_date) {
+    $is_expired = (strtotime($expiry_date) < time());
+}
 ?>
-
 <div class="main-content">
     <div class="cards-row" id="loading-cards">
-        <div class="card"><div class="loader"></div></div>
-        <div class="card"><div class="loader"></div></div>
-    </div>
+        
+        <!-- Subscription Overview Card -->
+        <div class="card" style="padding: 15px; display: flex; flex-direction: column; align-items: flex-start;">
+            <h3 style="margin-top:0; margin-bottom: 8px;">Subscription Details</h3>
 
-    <!-- Trigger Button -->
-    <p>
-        <a href="javascript:void(0);" id="stageTriggerBtn"
-           style="font-weight: bold; color: #007bff; text-decoration: underline;">
-            <?php
-            // If completed, show "Click to view games"
-            if ($current_stage === 'completed') {
-                echo "Click to view games";
-            } else {
-                echo $stageConfig ? $stageConfig['link_text'] : "View Today's Tips";
-            }
-            ?>
-        </a>
-    </p>
+            <!-- Current Plan -->
+            <div style="margin-bottom: 6px; font-size: 16px;">
+                Current Plan: 
+                <?php if ($is_expired || !$plan_name): ?>
+                    <span style="background:#dc3545; color:#fff; padding:2px 6px; border-radius:4px; font-size:14px;">
+                        Expired
+                    </span>
+                <?php else: ?>
+                    <?php echo htmlspecialchars($plan_name); ?>
+                <?php endif; ?>
+            </div>
 
-    <!-- Stage Modal (on page load) -->
-    <div id="stageModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-        background-color:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center;">
-        <div style="background:#fff; padding:30px; border-radius:12px; width:90%; max-width:420px; box-shadow:0 10px 30px rgba(0,0,0,0.2); text-align:center; position:relative;">
-            <h2 style="margin-top:0; color:#28a745;"><?php echo $stageConfig ? $stageConfig['title'] : ''; ?></h2>
-            <p style="color:#444; font-size:15px; margin-bottom:20px;">
-                <?php echo $stageConfig ? $stageConfig['desc'] : ''; ?>
-            </p>
-            <?php if ($stageConfig && !empty($stageConfig['whatsapp_text'])): ?>
-                <button onclick="redirectToWhatsAppStage()" style="background-color:#051e0bff; color:white; border:none; padding:12px 24px; border-radius:6px; font-size:16px; font-weight:bold; cursor:pointer; width:100%; margin-bottom:12px;">
-                    <i class="fab fa-whatsapp" style="margin-right:8px;"></i> Pay Now via WhatsApp
-                </button>
-            <?php endif; ?>
-            <button onclick="closeStageModal()" style="background:transparent; color:#dc3545; border:none; font-size:14px; cursor:pointer; text-decoration:underline;">
-                Close
-            </button>
-        </div>
-    </div>
-
-    <!-- Next Stage Modal -->
-    <div id="nextStageModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-        background-color:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center;">
-        <div style="background:#fff; padding:30px; border-radius:12px; width:90%; max-width:520px; box-shadow:0 10px 30px rgba(0,0,0,0.2); text-align:center; position:relative;">
-            <h2 style="margin-top:0; color:#dc3545;">
-                <?php
-                if ($stageConfig && isset($stageConfig['next_modal']['show_predictions']) && $stageConfig['next_modal']['show_predictions']) {
-                    echo "Today's Predictions";
+            <!-- Expiry Date -->
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 12px;">
+                Expiry Date: 
+                <?php 
+                if ($expiry_date) {
+                    echo date("F j, Y", strtotime($expiry_date));
                 } else {
-                    echo "Payment Required";
-                }
-                ?>
-            </h2>
-            <div style="color:#444; font-size:15px; margin-bottom:20px;">
-                <?php
-                if ($stageConfig && isset($stageConfig['next_modal']['show_predictions']) && $stageConfig['next_modal']['show_predictions']) {
-                    // Display today's predictions
-                    $today = date('Y-m-d');
-                    $sql_pred = "
-                        SELECT p.*, 
-                               th.name AS home_team, 
-                               ta.name AS away_team, 
-                               l.name AS league_name, 
-                               l.country AS league_country
-                        FROM predictions p
-                        JOIN teams th ON p.team_home_id = th.id
-                        JOIN teams ta ON p.team_away_id = ta.id
-                        JOIN leagues l ON p.league_id = l.id
-                        WHERE DATE(p.match_date) = :today AND p.type = 'fixed'
-                        ORDER BY p.match_date ASC
-                    ";
-                    $stmt_pred = $dbh->prepare($sql_pred);
-                    $stmt_pred->bindValue(':today', $today);
-                    $stmt_pred->execute();
-                    $predictions = $stmt_pred->fetchAll(PDO::FETCH_ASSOC);
-
-                    if ($predictions) {
-                        echo '<div class="today-predictions">';
-                        foreach ($predictions as $pred) {
-                            echo '<div class="prediction-card" style="border:1px solid #eee; border-radius:8px; margin-bottom:16px; padding:12px; background:#f9f9f9;">';
-                            echo '<div style="font-weight:bold; color:#007bff;">' . htmlspecialchars($pred['league_name']) . ' (' . htmlspecialchars($pred['league_country']) . ')</div>';
-                            echo '<div style="margin:6px 0;"><i class="fas fa-futbol"></i> ' . (isset($pred['sport_type']) ? htmlspecialchars(ucfirst($pred['sport_type'])) : 'Football') . '</div>';
-                            echo '<div><i class="fas fa-clock"></i> ' . date('H:i', strtotime($pred['match_date'])) . '</div>';
-                            echo '<div style="margin:6px 0;">' . htmlspecialchars($pred['home_team']) . ' vs ' . htmlspecialchars($pred['away_team']) . '</div>';
-                            echo '<div><strong>Prediction:</strong> ' . htmlspecialchars($pred['prediction_text']) . '</div>';
-                            echo '<div><strong>Odds:</strong> ' . htmlspecialchars($pred['odds']) . '</div>';
-                            echo '<div><strong>Result:</strong> ';
-                            if ($pred['result'] === 'won') {
-                                echo '<span style="color:green;font-weight:bold;"><i class="fas fa-check-circle"></i> Won</span>';
-                            } elseif ($pred['result'] === 'lose') {
-                                echo '<span style="color:red;font-weight:bold;"><i class="fas fa-times-circle"></i> Lose</span>';
-                            } else {
-                                echo '<span style="color:#888;">Pending</span>';
-                            }
-                            echo '</div>';
-                            echo '<div><strong>Score:</strong> ' . htmlspecialchars($pred['score']) . '</div>';
-                            echo '</div>';
-                        }
-                        echo '</div>';
-                    } else {
-                        echo "No predictions available for today.";
-                    }
-                } else {
-                    echo $stageConfig ? $stageConfig['next_modal']['msg'] : '';
+                    echo 'N/A';
                 }
                 ?>
             </div>
-            <?php if ($stageConfig && isset($stageConfig['next_modal']['whatsapp_text'])): ?>
-                <button onclick="redirectToWhatsAppNextStage()" style="background-color:#051e0bff; color:white; border:none; padding:12px 24px; border-radius:6px; font-size:16px; font-weight:bold; cursor:pointer; width:100%; margin-bottom:12px;">
-                    <i class="fab fa-whatsapp" style="margin-right:8px;"></i> Pay Now via WhatsApp
+
+            <!-- Buttons -->
+            <div style="display: flex; gap: 10px;">
+                <button 
+                    style="background:#007bff; color:#fff; padding:8px 12px; border:none; border-radius:4px; cursor:pointer;
+                    <?php echo (!$is_expired && $plan_name) ? 'opacity:0.6; cursor:not-allowed;' : ''; ?>"
+                    <?php echo (!$is_expired && $plan_name) ? 'disabled' : 'onclick="window.location.href=\'buy-plan\'"'; ?>>
+                    Buy Plan
                 </button>
-            <?php endif; ?>
-            <button onclick="closeNextStageModal()" style="background:transparent; color:#dc3545; border:none; font-size:14px; cursor:pointer; text-decoration:underline;">
-                Close
-            </button>
-        </div>
-    </div>
-
-    <!-- Today's Score Modal (for completed stage) -->
-    <div id="todayScoreModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-        background-color:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center;">
-        <div style="background:#fff; padding:30px; border-radius:12px; width:90%; max-width:520px; box-shadow:0 10px 30px rgba(0,0,0,0.2); text-align:center; position:relative;">
-            <h2 style="margin-top:0; color:#007bff;">Today's Score</h2>
-            <div style="color:#444; font-size:15px; margin-bottom:20px;">
-                <?php
-                $today = date('Y-m-d');
-                $sql_score = "
-                    SELECT p.*, 
-                           th.name AS home_team, 
-                           ta.name AS away_team, 
-                           l.name AS league_name, 
-                           l.country AS league_country
-                    FROM predictions p
-                    JOIN teams th ON p.team_home_id = th.id
-                    JOIN teams ta ON p.team_away_id = ta.id
-                    JOIN leagues l ON p.league_id = l.id
-                    WHERE DATE(p.match_date) = :today AND p.type = 'fixed'
-                    ORDER BY p.match_date ASC
-                ";
-                $stmt_score = $dbh->prepare($sql_score);
-                $stmt_score->bindValue(':today', $today);
-                $stmt_score->execute();
-                $scores = $stmt_score->fetchAll(PDO::FETCH_ASSOC);
-
-                if ($scores) {
-                    echo '<div class="today-scores">';
-                    foreach ($scores as $score) {
-                        echo '<div class="score-card" style="border:1px solid #eee; border-radius:8px; margin-bottom:16px; padding:12px; background:#f9f9f9;">';
-                        echo '<div style="font-weight:bold; color:#007bff;">' . htmlspecialchars($score['league_name']) . ' (' . htmlspecialchars($score['league_country']) . ')</div>';
-                        echo '<div style="margin:6px 0;"><i class="fas fa-futbol"></i> ' . (isset($score['sport_type']) ? htmlspecialchars(ucfirst($score['sport_type'])) : 'Football') . '</div>';
-                        echo '<div><i class="fas fa-clock"></i> ' . date('H:i', strtotime($score['match_date'])) . '</div>';
-                        echo '<div style="margin:6px 0;">' . htmlspecialchars($score['home_team']) . ' vs ' . htmlspecialchars($score['away_team']) . '</div>';
-                        echo '<div><strong>Odd:</strong> ' . htmlspecialchars($score['odds']) . '</div>';
-                        echo '</div>';
-                    }
-                    echo '</div>';
-                } else {
-                    echo "No scores available for today.";
-                }
-                ?>
             </div>
-            <button onclick="closeTodayScoreModal()" style="background:transparent; color:#dc3545; border:none; font-size:14px; cursor:pointer; text-decoration:underline;">
-                Close
-            </button>
         </div>
+
+        <!-- Wallet Balance Card -->
+        <div class="card" style="padding: 15px; display: flex; flex-direction: column; align-items: flex-start;">
+            <h3 style="margin-top:0; margin-bottom: 15px;">Wallet Balance</h3>
+            <div style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+                N<?php echo isset($row_user['wallet_balance']) ? number_format($row_user['wallet_balance'], 2) : '0.00'; ?>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button id="btn-topup" style="background:#28a745; color:#fff; padding:8px 12px; border:none; border-radius:4px; cursor:pointer;">
+                    Top Up
+                </button>
+            </div>
+        </div>
+
     </div>
 
-    <script>
-    // Show stage modal on page load if config exists
-    document.addEventListener('DOMContentLoaded', function() {
-        <?php if ($stageConfig): ?>
-            document.getElementById('stageModal').style.display = 'flex';
-        <?php endif; ?>
-    });
-
-    function closeStageModal() {
-        document.getElementById('stageModal').style.display = 'none';
-    }
-
-    // Handle trigger button click
-    document.getElementById('stageTriggerBtn').onclick = function() {
-        <?php if ($current_stage === 'completed'): ?>
-            document.getElementById('todayScoreModal').style.display = 'flex';
-        <?php else: ?>
-            document.getElementById('nextStageModal').style.display = 'flex';
-        <?php endif; ?>
-    };
-
-    function closeNextStageModal() {
-        document.getElementById('nextStageModal').style.display = 'none';
-    }
-
-    function closeTodayScoreModal() {
-        document.getElementById('todayScoreModal').style.display = 'none';
-    }
-
-    function redirectToWhatsAppStage() {
-        <?php
-        $name = rawurlencode($row_user['full_name']);
-        $siteName = rawurlencode($row_website['site_name']);
-        $phone = rawurlencode($row_website['whatsapp_phone']);
-        $whatsapp_text = $stageConfig && isset($stageConfig['whatsapp_text'])
-            ? sprintf($stageConfig['whatsapp_text'], $row_user['full_name'], $row_website['site_name'])
-            : '';
-        ?>
-        const phone = "<?php echo $phone; ?>";
-        const text = "<?php echo addslashes($whatsapp_text); ?>";
-        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-        window.open(whatsappUrl, '_blank');
-        setTimeout(function () {
-            window.location.href = 'index';
-        }, 1000);
-    }
-
-    function redirectToWhatsAppNextStage() {
-        <?php
-        $name = rawurlencode($row_user['full_name']);
-        $siteName = rawurlencode($row_website['site_name']);
-        $phone = rawurlencode($row_website['whatsapp_phone']);
-        $whatsapp_text_next = $stageConfig && isset($stageConfig['next_modal']['whatsapp_text'])
-            ? sprintf($stageConfig['next_modal']['whatsapp_text'], $row_user['full_name'], $row_website['site_name'])
-            : '';
-        ?>
-        const phone = "<?php echo $phone; ?>";
-        const text = "<?php echo addslashes($whatsapp_text_next); ?>";
-        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-        window.open(whatsappUrl, '_blank');
-        setTimeout(function () {
-            window.location.href = 'index';
-        }, 1000);
-    }
-    </script>
 
     <div class="past-label">
         Past successful fixed matches
@@ -485,7 +254,87 @@ $stageConfig = isset($modalConfig[$current_stage]) ? $modalConfig[$current_stage
     </div>
 </div>
 
-<!-- WhatsApp Floating Icon -->
-<a href="https://wa.me/<?php echo isset($row_website['whatsapp_phone']) ? htmlspecialchars($row_website['whatsapp_phone']) : ''; ?>" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+<?php include 'partials/whatsapp.php'; ?>
+
+<!-- Top Up Modal (hidden by default) -->
+<div id="topup-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#fff; width:420px; border-radius:8px; padding:20px; box-shadow:0 8px 24px rgba(0,0,0,0.2); position:relative;">
+        <button id="topup-close" style="position:absolute; right:12px; top:12px; background:transparent; border:none; font-size:18px; cursor:pointer;">&times;</button>
+        <h3 style="margin-top:0;">Top Up Wallet</h3>
+        <p style="margin-bottom:10px; color:#555;">
+            Enter the amount you'd like to add to your wallet. After clicking <strong>Pay now</strong> you'll be redirected to complete the payment securely via Paystack.
+        </p>
+
+        <form id="topup-form">
+            <label for="topup-amount">Amount (NGN)</label>
+            <input id="topup-amount" name="amount" type="number" min="50" step="0.01" placeholder="e.g. 500.00"
+                required style="width:60%; padding:10px; margin:8px 0 16px 0; border:1px solid #ddd; border-radius:4px;">
+
+            <div style="font-size:14px; color:#666; margin-bottom:14px;">
+                Payment is secured by Paystack.
+            </div>
+
+            <div style="display:flex; gap:8px; justify-content:flex-end;">
+                <button type="button" id="topup-cancel" style="background:#6c757d; color:#fff; padding:8px 12px; border:none; border-radius:4px; cursor:pointer;">Cancel</button>
+                <button type="submit" id="topup-pay" style="background:#007bff; color:#fff; padding:8px 12px; border:none; border-radius:4px; cursor:pointer;">Pay now</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Paystack inline script -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+(function(){
+    const btnTopup = document.getElementById('btn-topup');
+    const modal = document.getElementById('topup-modal');
+    const closeBtn = document.getElementById('topup-close');
+    const cancelBtn = document.getElementById('topup-cancel');
+    const form = document.getElementById('topup-form');
+
+    btnTopup.addEventListener('click', ()=>{
+        modal.style.display = 'flex';
+        document.getElementById('topup-amount').focus();
+    });
+    closeBtn.addEventListener('click', ()=> modal.style.display = 'none');
+    cancelBtn.addEventListener('click', ()=> modal.style.display = 'none');
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const amountEl = document.getElementById('topup-amount');
+        let amount = parseFloat(amountEl.value);
+        if (!amount || amount < 50) {
+            alert('Please enter a valid amount (minimum N50).');
+            amountEl.focus();
+            return;
+        }
+
+        const amountKobo = Math.round(amount * 100);
+        const reference = 'topup_' + Date.now() + '_<?php echo intval($user_id); ?>';
+
+        var handler = PaystackPop.setup({
+            key: '<?php echo addslashes($paystack_public_key); ?>',
+            email: '<?php echo isset($row_user['email']) ? addslashes($row_user['email']) : ''; ?>',
+            amount: amountKobo,
+            ref: reference,
+            metadata: {
+                custom_fields: [
+                    { display_name: "User ID", variable_name: "user_id", value: '<?php echo intval($user_id); ?>' }
+                ]
+            },
+            onClose: function(){
+                // user closed modal
+            },
+            callback: function(response){
+                const ref = encodeURIComponent(response.reference || reference);
+                const amt = encodeURIComponent(amount.toFixed(2));
+                modal.style.display = 'none';
+                window.location.href = 'verify-topup.php?reference=' + ref + '&amount=' + amt;
+            }
+        });
+
+        handler.openIframe();
+    });
+
+})();
+</script>
